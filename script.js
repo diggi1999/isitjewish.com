@@ -9,7 +9,7 @@ document.getElementById("searchForm").addEventListener("submit", async (e) => {
 
   // Enlaces públicos
   document.getElementById("googleLink").href =
-    `https://www.google.com/search?q=${encodeURIComponent(query + " jewish heritage")}`;
+    `https://www.google.com/search?q=${encodeURIComponent(query + " heritage family background")}`;
 
   document.getElementById("wikiLink").href =
     `https://en.wikipedia.org/wiki/${encodeURIComponent(query.replace(/ /g, "_"))}`;
@@ -24,12 +24,43 @@ document.getElementById("searchForm").addEventListener("submit", async (e) => {
     const res = await fetch(apiUrl);
     const data = await res.json();
 
+    let summaryText = "";
+    let heritageInfo = "";
+
     if (data.extract) {
-      document.getElementById("summary").textContent = data.extract;
+      summaryText = data.extract;
+
+      // Buscar menciones relevantes
+      const lower = summaryText.toLowerCase();
+
+      const keywords = [
+        "jewish",
+        "judaism",
+        "heritage",
+        "family",
+        "background",
+        "born",
+        "parents",
+        "ancestry"
+      ];
+
+      const found = keywords.filter(k => lower.includes(k));
+
+      if (found.length > 0) {
+        heritageInfo = "Wikipedia menciona información relacionada con origen familiar o cultural.";
+      } else {
+        heritageInfo = "No hay información pública disponible sobre origen cultural o religioso.";
+      }
+
     } else {
-      document.getElementById("summary").textContent =
-        "No public summary available. Use the links below to explore more information.";
+      summaryText = "No public summary available. Use the links below to explore more information.";
+      heritageInfo = "No hay información pública disponible sobre origen cultural o religioso.";
     }
+
+    document.getElementById("summary").innerHTML =
+      `<strong>Resumen público:</strong><br>${summaryText}<br><br>
+       <strong>Origen familiar / cultural:</strong><br>${heritageInfo}`;
+
   } catch {
     document.getElementById("summary").textContent =
       "Unable to load public information. Try the links below.";
