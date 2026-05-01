@@ -41,25 +41,28 @@ document.getElementById("searchForm").addEventListener("submit", async (e) => {
         "background",
         "born",
         "parents",
-        "ancestry"
+        "ancestry",
+        "religion"
       ];
 
       const found = keywords.filter(k => lower.includes(k));
 
       if (found.length > 0) {
-        heritageInfo = "Wikipedia menciona información relacionada con origen familiar o cultural.";
+        heritageInfo = `<strong>Origen familiar / cultural (según Wikipedia):</strong><br>
+        Wikipedia menciona información relacionada con origen familiar, cultural o religioso.`;
       } else {
-        heritageInfo = "No hay información pública disponible sobre origen cultural o religioso.";
+        heritageInfo = `<strong>Origen familiar / cultural:</strong><br>
+        No hay información pública disponible sobre origen cultural o religioso.`;
       }
 
     } else {
       summaryText = "No public summary available. Use the links below to explore more information.";
-      heritageInfo = "No hay información pública disponible sobre origen cultural o religioso.";
+      heritageInfo = `<strong>Origen familiar / cultural:</strong><br>
+      No hay información pública disponible sobre origen cultural o religioso.`;
     }
 
     document.getElementById("summary").innerHTML =
-      `<strong>Resumen público:</strong><br>${summaryText}<br><br>
-       <strong>Origen familiar / cultural:</strong><br>${heritageInfo}`;
+      `<strong>Resumen público:</strong><br>${summaryText}<br><br>${heritageInfo}`;
 
   } catch {
     document.getElementById("summary").textContent =
