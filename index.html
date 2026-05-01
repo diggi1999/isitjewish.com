@@ -1,14 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>IsItJewish</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>IsItJewish — Public Info Search</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body style="text-align:center; font-family:Arial; margin-top:100px;">
 
-  <h1>IsItJewish</h1>
-  <input type="text" placeholder="Enter a name">
-  <button>Search</button>
+<body>
+  <main class="container">
+    <h1 class="title">IsItJewish</h1>
+    <p class="subtitle">Search public information about people or companies.</p>
 
+    <form id="searchForm" class="search-box">
+      <input type="text" id="query" placeholder="Type a name..." required />
+      <button type="submit">Search</button>
+    </form>
+
+    <section id="results" class="results hidden">
+      <h2 id="nameTitle"></h2>
+      <p id="summary"></p>
+
+      <div class="links">
+        <a id="googleLink" target="_blank">Google Search</a>
+        <a id="wikiLink" target="_blank">Wikipedia</a>
+        <a id="newsLink" target="_blank">News</a>
+      </div>
+
+      <p class="disclaimer">
+        This site does not determine or claim anyone’s religious or ethnic identity.
+        It only displays links to public information.
+      </p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    © 2026 IsItJewish.com — Public Information Only
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
